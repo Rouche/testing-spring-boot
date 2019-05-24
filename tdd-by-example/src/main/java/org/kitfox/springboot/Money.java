@@ -12,11 +12,11 @@ public class Money {
     protected final String currency;
 
     public static Money dollar(int amount) {
-        return new Dollar(amount, "USD");
+        return new Money(amount, "USD");
     }
 
     public static Money euro(int amount) {
-        return new Euro(amount, "EU");
+        return new Money(amount, "EU");
     }
 
     public Money times(int value) {
