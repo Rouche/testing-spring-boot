@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
  * @Author Jean-Francois Larouche (jealar2) on 2019-05-24
  */
 @EqualsAndHashCode
-public abstract class Money {
+public class Money {
 
     protected final int amount;
     protected final String currency;
@@ -19,7 +19,9 @@ public abstract class Money {
         return new Euro(amount, "EU");
     }
 
-    public abstract Money times(int value);
+    public Money times(int value) {
+        return new Money(this.amount * value, currency);
+    }
 
     public Money(int amount, String currency) {
         this.amount = amount;
@@ -27,7 +29,7 @@ public abstract class Money {
     }
 
     protected boolean canEqual(Object other) {
-        return this.getClass().equals(other.getClass());
+        return this.currency.equals(((Money) other).currency);
     }
 
     public String currency() {
