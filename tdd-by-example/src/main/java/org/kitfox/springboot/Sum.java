@@ -1,7 +1,7 @@
 package org.kitfox.springboot;
 
 /**
- * @Author Jean-Francois Larouche (jealar2) on 2019-06-03
+ * @author Jean-Francois Larouche (jealar2) on 2019-06-03
  */
 public class Sum implements Expression {
 
@@ -21,7 +21,12 @@ public class Sum implements Expression {
 
     @Override
     public Expression plus(Expression addend) {
-        return null;
+        return new Sum(this, addmend);
+    }
+
+    @Override
+    public Expression times(int multipolier) {
+        return new Sum(augmend.times(multipolier), addmend.times(multipolier));
     }
 
 }

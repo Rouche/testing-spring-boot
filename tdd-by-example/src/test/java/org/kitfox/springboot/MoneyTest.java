@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
- * @Author Jean-Francois Larouche (jealar2) on 2019-05-24
+ * @author Jean-Francois Larouche (jealar2) on 2019-05-24
  */
 public class MoneyTest {
 
@@ -49,6 +49,28 @@ public class MoneyTest {
         Sum sum = (Sum) result;
         assertEquals(five, sum.augmend);
         assertEquals(five, sum.addmend);
+    }
+
+    @Test
+    void testSumPlusMoney() {
+        Expression fiveDol = Money.dollar(5);
+        Expression tenEu = Money.euro(10);
+        Bank bank = new Bank();
+        bank.addRate("EU", "USD", 2);
+        Expression sum = new Sum(fiveDol, tenEu).plus(fiveDol);
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(15), result);
+    }
+
+    @Test
+    void testSumTimes() {
+        Expression fiveDol = Money.dollar(5);
+        Expression tenEu = Money.euro(10);
+        Bank bank = new Bank();
+        bank.addRate("EU", "USD", 2);
+        Expression sum = new Sum(fiveDol, tenEu).plus(fiveDol);
+        Money result = bank.reduce(sum, "USD");
+        assertEquals(Money.dollar(15), result);
     }
 
     @Test
