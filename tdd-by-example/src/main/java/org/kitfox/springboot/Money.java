@@ -1,11 +1,11 @@
 package org.kitfox.springboot;
 
-import lombok.EqualsAndHashCode;
+import lombok.Data;
 
 /**
  * @Author Jean-Francois Larouche (jealar2) on 2019-05-24
  */
-@EqualsAndHashCode
+@Data
 public class Money implements Expression {
 
     protected final int amount;
