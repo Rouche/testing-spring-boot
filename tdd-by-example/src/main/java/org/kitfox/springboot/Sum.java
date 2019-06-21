@@ -5,18 +5,23 @@ package org.kitfox.springboot;
  */
 public class Sum implements Expression {
 
-    public Money augmend;
-    public Money addmend;
+    public Expression augmend;
+    public Expression addmend;
 
-    public Sum(Money augmend, Money addmend) {
+    public Sum(Expression augmend, Expression addmend) {
         this.augmend = augmend;
         this.addmend = addmend;
     }
 
     @Override
     public Money reduce(Bank bank, String toCurrency) {
-        int amount = augmend.amount + addmend.amount;
+        int amount = augmend.reduce(bank, toCurrency).amount + addmend.reduce(bank, toCurrency).amount;
         return new Money(amount, toCurrency);
+    }
+
+    @Override
+    public Expression plus(Expression addend) {
+        return null;
     }
 
 }
