@@ -11,11 +11,6 @@ public class Money implements Expression {
     protected final int amount;
     protected final String currency;
 
-    public Money(int amount, String currency) {
-        this.amount = amount;
-        this.currency = currency;
-    }
-
     public static Money dollar(int amount) {
         return new Money(amount, "USD");
     }
@@ -28,20 +23,23 @@ public class Money implements Expression {
         return new Money(this.amount * value, currency);
     }
 
-    protected boolean canEqual(Object other) {
-        return this.currency.equals(((Money) other).currency);
-    }
-
-    public String currency() {
-        return this.currency;
-    }
-
     @Override
-    public Money reduce(String to) {
-        return this;
+    public Money reduce(Bank bank, String to) {
+        int rate = bank.rate(this.currency, to);
+        return new Money(this.amount / rate, to);
     }
 
     public Expression plus(Money addend) {
         return new Sum(this, addend);
+    }
+
+    /**
+     * Lombok
+     *
+     * @param other Money
+     * @return true if it can
+     */
+    protected boolean canEqual(Object other) {
+        return this.currency.equals(((Money) other).currency);
     }
 }

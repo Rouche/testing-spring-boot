@@ -30,7 +30,7 @@ public class MoneyTest {
 
     @Test
     void testCurrency() {
-        assertEquals("USD", Money.dollar(1).currency());
+        assertEquals("USD", Money.dollar(1).getCurrency());
     }
 
     @Test
@@ -65,4 +65,20 @@ public class MoneyTest {
         Money reduced = bank.reduce(Money.dollar(1), "USD");
         assertEquals(Money.dollar(1), reduced);
     }
+
+    @Test
+    void testReduceMoneyDifferentCurrency() {
+        Bank bank = new Bank();
+        bank.addRate("EU", "USD", 2);
+        Money result = bank.reduce(Money.euro(2), "USD");
+        assertEquals(Money.dollar(1), result);
+    }
+
+    @Test
+    void testIdentityRate() {
+        assertEquals(1, new Bank().rate("USD", "USD"));
+        assertEquals(1, new Bank().rate("EU", "EU"));
+    }
+
+
 }
