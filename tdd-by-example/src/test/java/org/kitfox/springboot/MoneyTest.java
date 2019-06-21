@@ -68,9 +68,9 @@ public class MoneyTest {
         Expression tenEu = Money.euro(10);
         Bank bank = new Bank();
         bank.addRate("EU", "USD", 2);
-        Expression sum = new Sum(fiveDol, tenEu).plus(fiveDol);
+        Expression sum = new Sum(fiveDol, tenEu).times(2);
         Money result = bank.reduce(sum, "USD");
-        assertEquals(Money.dollar(15), result);
+        assertEquals(Money.dollar(20), result);
     }
 
     @Test

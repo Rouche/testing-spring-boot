@@ -6,11 +6,11 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * @Author Jean-Francois Larouche (jealar2) on 2019-06-03
+ * @author Jean-Francois Larouche (jealar2) on 2019-06-03
  */
 public class Bank {
 
-    private Map<Pair, Integer> rateMap = new HashMap<>();
+    private final Map<Pair, Integer> rateMap = new HashMap<>();
 
     public Money reduce(Expression exp, String toCurrency) {
 //        if(exp instanceof Money) {

@@ -5,8 +5,8 @@ package org.kitfox.springboot;
  */
 public class Sum implements Expression {
 
-    public Expression augmend;
-    public Expression addmend;
+    public final Expression augmend;
+    public final Expression addmend;
 
     public Sum(Expression augmend, Expression addmend) {
         this.augmend = augmend;

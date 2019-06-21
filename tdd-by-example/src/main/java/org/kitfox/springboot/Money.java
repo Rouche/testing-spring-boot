@@ -41,6 +41,7 @@ public class Money implements Expression {
      * @param other Money
      * @return true if it can
      */
+    @SuppressWarnings("unused")
     protected boolean canEqual(Object other) {
         return this.currency.equals(((Money) other).currency);
     }
