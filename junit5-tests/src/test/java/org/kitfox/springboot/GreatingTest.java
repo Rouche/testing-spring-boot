@@ -1,7 +1,6 @@
 package org.kitfox.springboot;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import lombok.extern.slf4j.Slf4j;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,6 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class GreatingTest {
 
     private Greating greating;
+
+    @BeforeAll
+    public static void beforeAll() {
+        log.debug("Before Class");
+    }
 
     @BeforeEach
     void setUp() {
@@ -36,5 +40,15 @@ public class GreatingTest {
         String result = greating.helloWorld("ME");
 
         assertEquals("HELLO ME", result);
+    }
+
+    @AfterEach
+    void afterEach() {
+        log.debug("In After Each");
+    }
+
+    @AfterAll
+    public static void afterAll() {
+        log.debug("In After All");
     }
 }
