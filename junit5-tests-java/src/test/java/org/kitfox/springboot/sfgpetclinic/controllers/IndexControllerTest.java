@@ -3,6 +3,7 @@ package org.kitfox.springboot.sfgpetclinic.controllers;
 import java.time.Duration;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,7 @@ class IndexControllerTest {
 //                " message to build" + " during test");
     }
 
-    //@Disabled("Demo of timeout")
+    @Disabled("Demo of timeout")
     @Test
     void testTimeout() {
         assertTimeout(Duration.ofMillis(100), () -> {
@@ -43,13 +44,13 @@ class IndexControllerTest {
         });
     }
 
-    //@Disabled("Demo of timeout")
+    @Disabled("Demo of timeout Preemptively")
     @Test
     void testTimeoutPreemptively() {
         assertTimeoutPreemptively(Duration.ofMillis(100), () -> {
             Thread.sleep(2000);
 
-            log.error("Im here 2");
+            log.error("Im here Preemptively");
         });
     }
 }
