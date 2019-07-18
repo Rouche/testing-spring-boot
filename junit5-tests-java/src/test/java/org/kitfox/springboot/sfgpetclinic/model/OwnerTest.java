@@ -2,6 +2,8 @@ package org.kitfox.springboot.sfgpetclinic.model;
 
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -21,5 +23,7 @@ class OwnerTest {
                         () -> assertEquals("Vancouver", owner.getCity(), "City Did Not Match"),
                         () -> assertEquals("5551231212", owner.getTelephone())
                 ));
+
+        assertThat(owner.getCity(), is("Vancouver"));
     }
 }
