@@ -9,8 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.*;
 import lombok.extern.slf4j.Slf4j;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
+
 
 @Slf4j
 class IndexControllerTest {
@@ -26,6 +28,10 @@ class IndexControllerTest {
     @Test
     void index() {
         assertEquals("index", indexController.index());
+        assertEquals("index", indexController.index(), "Wrong View Returned");
+
+        assertThat(indexController.index()).isEqualTo("index");
+
     }
 
     @Test
