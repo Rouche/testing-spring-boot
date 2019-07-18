@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.*;
 import lombok.extern.slf4j.Slf4j;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -63,5 +64,38 @@ class IndexControllerTest {
     @Test
     void testAssumptionTrueIsTrue() {
         assumeTrue("ZOMG".equals("ZOMG"));
+    }
+
+    /**
+     * https://junit.org/junit5/docs/current/user-guide/#writing-tests-conditional-execution
+     */
+    @Test
+    @EnabledOnOs(OS.MAC)
+    void testMeOnMacOS() {
+    }
+
+    @Test
+    @EnabledOnOs(OS.WINDOWS)
+    void testMeOnMacWindows() {
+    }
+
+    @Test
+    @EnabledOnJre(JRE.JAVA_12)
+    void testMeOnMacJava11() {
+    }
+
+    @Test
+    @EnabledOnJre(JRE.JAVA_8)
+    void testMeOnMacJava8() {
+    }
+
+    @Test
+    @EnabledIfEnvironmentVariable(named = "USERNAME", matches = "zomfg")
+    void testMeIfUserZomg() {
+    }
+
+    @Test
+    @EnabledIfEnvironmentVariable(named = "USERNAME", matches = "jealar2")
+    void testMeIfUserLarj() {
     }
 }
