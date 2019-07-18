@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import lombok.extern.slf4j.Slf4j;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @Slf4j
 class IndexControllerTest {
@@ -52,5 +53,15 @@ class IndexControllerTest {
 
             log.error("Im here Preemptively");
         });
+    }
+
+    @Test
+    void testAssumptionTrue() {
+        assumeTrue("ZOMG".equals(System.getenv("ZOMG_RUNTIME")));
+    }
+
+    @Test
+    void testAssumptionTrueIsTrue() {
+        assumeTrue("ZOMG".equals("ZOMG"));
     }
 }
