@@ -2,10 +2,7 @@ package org.kitfox.springboot.sfgpetclinic.controllers;
 
 import java.time.Duration;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.condition.*;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,6 +12,7 @@ import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 
 @Slf4j
+@Tag("controllers")
 class IndexControllerTest {
 
     IndexController indexController;
