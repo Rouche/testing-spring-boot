@@ -3,8 +3,8 @@ package org.kitfox.springboot.sfgpetclinic.controllers;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.kitfox.springboot.sfgpetclinic.ControllerTests;
 import org.kitfox.springboot.sfgpetclinic.fauxspring.Model;
 import org.kitfox.springboot.sfgpetclinic.fauxspring.ModelMapImpl;
 import org.kitfox.springboot.sfgpetclinic.model.Vet;
@@ -15,8 +15,7 @@ import org.kitfox.springboot.sfgpetclinic.services.map.VetMapService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Tag("controllers")
-class VetControllerTest {
+class VetControllerTest implements ControllerTests {
 
     VetService vetService;
     SpecialtyService specialtyService;
