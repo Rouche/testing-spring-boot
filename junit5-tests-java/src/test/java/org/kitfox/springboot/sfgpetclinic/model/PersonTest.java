@@ -1,8 +1,7 @@
 package org.kitfox.springboot.sfgpetclinic.model;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 import org.kitfox.springboot.sfgpetclinic.ModelTests;
-
 import lombok.extern.slf4j.Slf4j;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -31,16 +30,5 @@ class PersonTest implements ModelTests {
         assertAll("Test Props Set Msgs",
                 () -> assertEquals(person.getFirstName(), "Joe", "First name failed"),
                 () -> assertEquals(person.getLastName(), "Buck"));
-    }
-
-    @RepeatedTest(value = 10, name = RepeatedTest.DISPLAY_NAME_PLACEHOLDER + " " + RepeatedTest.CURRENT_REPETITION_PLACEHOLDER + " of " + RepeatedTest.TOTAL_REPETITIONS_PLACEHOLDER)
-    @DisplayName("My Repeated Test!")
-    void myRepeatTest() {
-        // blabla
-    }
-
-    @RepeatedTest(5)
-    void myRepeatedTestWithDI(TestInfo testInfo, RepetitionInfo repetitionInfo) {
-        log.info("{} : {}", testInfo.getDisplayName(), repetitionInfo.getCurrentRepetition());
     }
 }

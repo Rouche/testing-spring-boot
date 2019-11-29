@@ -85,7 +85,7 @@ class OwnerMapServiceTest {
                 assertThat(savedOwner).isNotNull();
             }
 
-            @DisplayName("Save Owners Tests - ")
+            @DisplayName("Find Owners Tests - ")
             @Nested
             class FindOwnersTests {
 
