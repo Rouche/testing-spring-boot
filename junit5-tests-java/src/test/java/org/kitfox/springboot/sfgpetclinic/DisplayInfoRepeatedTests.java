@@ -6,7 +6,7 @@ import org.junit.jupiter.api.*;
 public interface DisplayInfoRepeatedTests {
 
     /**
-     * 68: Tesi information
+     * 68: Test information
      * @param testInfo test information injected
      * @param reporter reporter injected
      */
