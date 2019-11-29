@@ -1,6 +1,8 @@
 package org.kitfox.springboot.sfgpetclinic.model;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.kitfox.springboot.sfgpetclinic.ModelTests;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -26,5 +28,11 @@ class OwnerTest implements ModelTests {
                 ));
 
         assertThat(owner.getCity(), is("Vancouver"));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"70:", "My", "Parameterized", "Test"})
+    void testValueSource(String val) {
+        System.out.println(val);
     }
 }
