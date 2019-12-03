@@ -109,6 +109,9 @@
                     <argLine>
                         --illegal-access=permit
                     </argLine>
+                    <!-- https://maven.apache.org/surefire/maven-surefire-plugin/examples/junit-platform.html -->
+                    <!-- <groups>model</groups>-->
+                    <!-- <excludedGroups>controllers</excludedGroups>-->
                 </configuration>
             </plugin>
             <plugin>
