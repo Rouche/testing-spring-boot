@@ -1,12 +1,11 @@
 package org.kitfox.springboot.sfgpetclinic.model;
 
+import java.util.stream.Stream;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.EnumSource;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.*;
 import org.kitfox.springboot.sfgpetclinic.ModelTests;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -60,5 +59,15 @@ class OwnerTest implements ModelTests {
     @CsvFileSource(resources = "/input.csv", numLinesToSkip = 1)
     void csvFileInputTest(String stateName, int val1, int val2) {
         System.out.println(stateName + " " + val1 + " " + val2);
+    }
+
+    @DisplayName("Method provider input Test")
+    @ParameterizedTest(name = "{displayName} => [{index}] {arguments}")
+    @MethodSource("getArgs")
+    void fromMethodTest(String stateName, int val1, int val2) {
+        System.out.println(stateName + " " + val1 + " " + val2);
+    }
+    static Stream<Arguments> getArgs() {
+        return Stream.of(Arguments.of("ME", 1, 2), Arguments.of("TH", 2, 3), Arguments.of("OD", 4, 5));
     }
 }
