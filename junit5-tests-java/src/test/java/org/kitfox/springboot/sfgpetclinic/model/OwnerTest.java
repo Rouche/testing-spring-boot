@@ -70,4 +70,11 @@ class OwnerTest implements ModelTests {
     static Stream<Arguments> getArgs() {
         return Stream.of(Arguments.of("ME", 1, 2), Arguments.of("TH", 2, 3), Arguments.of("OD", 4, 5));
     }
+
+    @DisplayName("Custom provider input Test")
+    @ParameterizedTest(name = "{displayName} => [{index}] {arguments}")
+    @ArgumentsSource(CustomArgsProvider.class)
+    void customProviderTest(String stateName, int val1, int val2) {
+        System.out.println(stateName + " " + val1 + " " + val2);
+    }
 }
