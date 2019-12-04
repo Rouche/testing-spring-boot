@@ -3,6 +3,7 @@
   "address": "34, rue Joe",
   "city": "Quebec",
   "telephone": "555-444-3333",
+  "birthDate": "1970-03-03",
   "firstName": "Joe",
   "lastName": "Shmoe"
 }

@@ -88,4 +88,12 @@ class OwnerTest implements ModelTests {
     void customConverterTest(@ConvertWith(JsonFileConverter.class) Owner val) {
         System.out.println(val);
     }
+
+    @DisplayName("Two Parameters Converter Test")
+    @ParameterizedTest(name = "{displayName} => [{index}] {arguments}")
+    @CsvSource({"/myparameter1.json, /myparameter2.json"})
+    void twoParametersConverterTest(@ConvertWith(JsonFileConverter.class) Owner val, @ConvertWith(JsonFileConverter.class) Owner val2) {
+        System.out.println(val);
+        System.out.println(val2);
+    }
 }

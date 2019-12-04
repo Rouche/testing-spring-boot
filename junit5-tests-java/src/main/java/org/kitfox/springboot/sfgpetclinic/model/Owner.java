@@ -1,10 +1,14 @@
 package org.kitfox.springboot.sfgpetclinic.model;
 
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -14,6 +18,7 @@ public class Owner extends Person {
     private String address;
     private String city;
     private String telephone;
+    private LocalDate birthDate;
     private Set<Pet> pets = new HashSet<>();
 
     public Owner(Long id, String firstName, String lastName) {
