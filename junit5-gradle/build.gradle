@@ -37,10 +37,12 @@ dependencies {
 }
 
 test {
+    // Integration tests: https://www.petrikainulainen.net/programming/gradle/getting-started-with-gradle-integration-testing/
     useJUnitPlatform()
 
     testLogging.showStandardStreams = true
 
+    // Enable logging running tests
     testLogging {
         events "passed", "skipped", "failed"
     }
