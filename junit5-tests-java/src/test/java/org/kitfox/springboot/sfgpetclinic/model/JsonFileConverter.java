@@ -10,6 +10,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Jean-Francois Larouche (rouche) on 12/4/2019
+ *
+ * Used to convert a JSON file name to its corresponding Java type parameter in JUnit 5.
+ *
+ * Usage:
+ *
+ * <pre>
+ *     // One parameter, repeated test
+ *      &#64;ParameterizedTest(name = "{displayName} => [{index}] {arguments}")
+ *     &#64;ValueSource(strings = {"/myrepetition1.json", "/myrepetition2.json"})
+ *     void oneParameterTest(&#64;ConvertWith(JsonFileConverter.class) MyObject val) {
+ *         ...
+ *     }
+ *
+ *     // Two parameters
+ *     &#64;ParameterizedTest(name = "{displayName} => [{index}] {arguments}")
+ *     &#64;CsvSource({"/myparameter1.json, /myparamegter2.json"})
+ *     void twoParametersTest(&#64;ConvertWith(JsonFileConverter.class) MyObject val, &#64;ConvertWith(JsonFileConverter.class) MyObject val2) {
+ *         ...
+ *     }
+ * </pre>
  */
 public class JsonFileConverter implements ArgumentConverter {
 
