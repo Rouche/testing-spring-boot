@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.*;
 import org.kitfox.springboot.sfgpetclinic.ModelTests;
 
@@ -76,5 +77,15 @@ class OwnerTest implements ModelTests {
     @ArgumentsSource(CustomArgsProvider.class)
     void customProviderTest(String stateName, int val1, int val2) {
         System.out.println(stateName + " " + val1 + " " + val2);
+    }
+
+    @DisplayName("Custom Converter Test")
+    @ParameterizedTest(name = "{displayName} => [{index}] {arguments}")
+    @ValueSource(strings = {
+            "/myparameter1.json",
+            "/myparameter2.json"
+    })
+    void customConverterTest(@ConvertWith(JsonFileConverter.class) Owner val) {
+        System.out.println(val);
     }
 }

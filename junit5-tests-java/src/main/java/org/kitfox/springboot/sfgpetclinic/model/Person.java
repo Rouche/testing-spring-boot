@@ -1,29 +1,18 @@
 package org.kitfox.springboot.sfgpetclinic.model;
 
-public class Person extends BaseEntity {
+import lombok.*;
 
-    public Person(Long id, String firstName, String lastName) {
-        super(id);
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+@Data
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+public class Person extends BaseEntity {
 
     private String firstName;
     private String lastName;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
+    public Person(Long id, String firstName, String lastName) {
+        super(id);
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 }
