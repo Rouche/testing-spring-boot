@@ -10,13 +10,11 @@ import org.kitfox.springboot.sfgpetclinic.fauxspring.BindingResult;
 import org.kitfox.springboot.sfgpetclinic.fauxspring.Model;
 import org.kitfox.springboot.sfgpetclinic.model.Owner;
 import org.kitfox.springboot.sfgpetclinic.services.OwnerService;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
-import org.mockito.Mock;
+import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
@@ -112,6 +110,7 @@ class OwnerControllerTest {
     void testFindWildcardsMany() {
         // Given
         Owner owner = new Owner(1L, "bob", "many");
+        InOrder inOrder = Mockito.inOrder(ownerService, model);
 
         //When
         String viewName = ownerController.processFindForm(owner, bindingResult, model);
@@ -119,6 +118,10 @@ class OwnerControllerTest {
         //Then
         assertThat(stringCaptor.getValue()).isEqualTo("%many%");
         assertThat(viewName).isEqualTo(OWNERS_OWNERS_LIST);
+
+        // InOrdedr assertions
+        inOrder.verify(ownerService).findAllByLastNameLike(anyString());
+        inOrder.verify(model).addAttribute(eq("selections"), anyList());
     }
 
     @Test
