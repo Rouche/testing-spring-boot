@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class OwnerControllerTest {
@@ -99,11 +100,12 @@ class OwnerControllerTest {
         Owner owner = new Owner(1L, "bob", "shmoe");
 
         //When
-        String viewName = ownerController.processFindForm(owner, bindingResult, null);
+        String viewName = ownerController.processFindForm(owner, bindingResult, model);
 
         //Then
         assertThat(stringCaptor.getValue()).isEqualTo("%shmoe%");
         assertThat(viewName).isEqualTo(REDIRECT_OWNERS_1);
+        verifyNoInteractions(model);
     }
 
     @Test
@@ -121,7 +123,8 @@ class OwnerControllerTest {
 
         // InOrdedr assertions
         inOrder.verify(ownerService).findAllByLastNameLike(anyString());
-        inOrder.verify(model).addAttribute(eq("selections"), anyList());
+        inOrder.verify(model, times(1)).addAttribute(eq("selections"), anyList());
+        verifyNoMoreInteractions(model);
     }
 
     @Test
