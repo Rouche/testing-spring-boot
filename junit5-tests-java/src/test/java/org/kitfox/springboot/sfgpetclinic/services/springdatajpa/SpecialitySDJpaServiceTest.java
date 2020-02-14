@@ -1,5 +1,6 @@
 package org.kitfox.springboot.sfgpetclinic.services.springdatajpa;
 
+import java.time.Duration;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -34,7 +35,7 @@ class SpecialitySDJpaServiceTest {
         specialitySDJpaService.deleteById(1L);
 
         // Then
-        then(specialtyRepository).should(atLeastOnce()).deleteById(1L);
+        then(specialtyRepository).should(timeout(Duration.ofMillis(10)).atLeastOnce()).deleteById(1L);
         //verify(specialtyRepository, atLeastOnce()).deleteById(1L);
     }
 
@@ -112,7 +113,7 @@ class SpecialitySDJpaServiceTest {
         //Then
         assertThat(found).isNotNull();
 
-        then(specialtyRepository).should(times(1)).findById(1L);
+        then(specialtyRepository).should(timeout(Duration.ofMillis(100)).times(1)).findById(1L);
         //then(specialtyRepository).should().findById(anyLong());
         then(specialtyRepository).shouldHaveNoMoreInteractions();
     }
@@ -133,7 +134,7 @@ class SpecialitySDJpaServiceTest {
 
         assertThrows(RuntimeException.class, () -> specialitySDJpaService.findById(1L));
 
-        then(specialtyRepository).should().findById(1L);
+        then(specialtyRepository).should(timeout(Duration.ofMillis(10))).findById(1L);
     }
 
     @Test
