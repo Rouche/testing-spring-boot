@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.kitfox.springboot.sfgpetclinic.fauxspring.BindingResult;
+import org.kitfox.springboot.sfgpetclinic.fauxspring.Model;
 import org.kitfox.springboot.sfgpetclinic.model.Owner;
 import org.kitfox.springboot.sfgpetclinic.services.OwnerService;
 import org.mockito.ArgumentCaptor;
@@ -24,14 +25,20 @@ class OwnerControllerTest {
 
     private static final String OWNERS_CREATE_OR_UPDATE_OWNER_FORM = "owners/createOrUpdateOwnerForm";
     private static final String REDIRECT_OWNERS_5 = "redirect:/owners/5";
+    public static final String OWNERS_FIND_OWNERS = "owners/findOwners";
+    public static final String REDIRECT_OWNERS_1 = "redirect:/owners/1";
+    public static final String OWNERS_OWNERS_LIST = "owners/ownersList";
 
     private OwnerController ownerController;
 
-    @Mock
+    @Mock(lenient = true)
     private OwnerService ownerService;
 
     @Mock
     private BindingResult bindingResult;
+
+    @Mock
+    private Model model;
 
     @Captor
     private ArgumentCaptor<String> stringCaptor;
@@ -39,6 +46,24 @@ class OwnerControllerTest {
     @BeforeEach
     void setUp() {
         ownerController = new OwnerController(ownerService);
+        given(ownerService.findAllByLastNameLike(stringCaptor.capture()))
+                .willAnswer(invocationOnMock -> {
+                    List<Owner> owners = new ArrayList<>();
+                    String name = invocationOnMock.getArgument(0);
+                    if (name.equals("%shmoe%")) {
+                        owners.add(new Owner(1L, "bob", "shmoe"));
+                        return owners;
+                    }
+                    if (name.equals("%nofound%")) {
+                        return owners;
+                    }
+                    if (name.equals("%many%")) {
+                        owners.add(new Owner(1L, "bob", "shmoe"));
+                        owners.add(new Owner(2L, "bob", "shmoe"));
+                        return owners;
+                    }
+                    throw new RuntimeException("Invalid Argument");
+                });
     }
 
     @Test
@@ -74,15 +99,42 @@ class OwnerControllerTest {
     void testFindWildcards() {
         // Given
         Owner owner = new Owner(1L, "bob", "shmoe");
-        List<Owner> owners = new ArrayList<>();
-        final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-        given(ownerService.findAllByLastNameLike(captor.capture())).willReturn(owners);
 
         //When
-        ownerController.processFindForm(owner, bindingResult, null);
+        String viewName = ownerController.processFindForm(owner, bindingResult, null);
 
         //Then
-        assertThat(captor.getValue()).isEqualTo("%shmoe%");
+        assertThat(stringCaptor.getValue()).isEqualTo("%shmoe%");
+        assertThat(viewName).isEqualTo(REDIRECT_OWNERS_1);
+    }
+
+    @Test
+    void testFindWildcardsMany() {
+        // Given
+        Owner owner = new Owner(1L, "bob", "many");
+
+        //When
+        String viewName = ownerController.processFindForm(owner, bindingResult, model);
+
+        //Then
+        assertThat(stringCaptor.getValue()).isEqualTo("%many%");
+        assertThat(viewName).isEqualTo(OWNERS_OWNERS_LIST);
+    }
+
+    @Test
+    void testNothingFound() {
+        // Given
+        Owner owner = new Owner(1L, "bob", "nofound");
+        //List<Owner> owners = new ArrayList<>();
+        //final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        //given(ownerService.findAllByLastNameLike(captor.capture())).willReturn(owners);
+
+        //When
+        String viewName = ownerController.processFindForm(owner, bindingResult, null);
+
+        //Then
+        assertThat(stringCaptor.getValue()).isEqualTo("%nofound%");
+        assertThat(viewName).isEqualTo(OWNERS_FIND_OWNERS);
     }
 
     @Test
@@ -90,7 +142,7 @@ class OwnerControllerTest {
         // Given
         Owner owner = new Owner(1L, "bob", "shmoe");
         List<Owner> owners = new ArrayList<>();
-        given(ownerService.findAllByLastNameLike(stringCaptor.capture())).willReturn(owners);
+        //given(ownerService.findAllByLastNameLike(stringCaptor.capture())).willReturn(owners);
 
         //When
         ownerController.processFindForm(owner, bindingResult, null);
