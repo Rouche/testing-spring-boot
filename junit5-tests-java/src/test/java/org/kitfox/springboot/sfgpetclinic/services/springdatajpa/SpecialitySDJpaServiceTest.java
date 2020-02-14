@@ -18,6 +18,7 @@ import static org.mockito.BDDMockito.*;
 @ExtendWith(MockitoExtension.class)
 class SpecialitySDJpaServiceTest {
 
+    //Lenient allow argument matcher to not fit and still pass the test
     @Mock(lenient = true)
     private SpecialtyRepository specialtyRepository;
 
