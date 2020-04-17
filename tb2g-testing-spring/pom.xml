@@ -58,7 +58,7 @@
         <junit-jupiter.version>5.3.2</junit-jupiter.version>
 
         <!-- Others -->
-        <jackson.version>2.9.8</jackson.version>
+        <jackson.version>2.10.3</jackson.version>
         <aspectj.version>1.9.1</aspectj.version>
 
         <!-- Maven plugins -->
