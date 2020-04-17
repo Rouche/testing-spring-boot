@@ -8,7 +8,6 @@ import org.springframework.samples.petclinic.sfg.YannyConfig;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringJUnitConfig(classes = {BaseConfig.class, YannyConfig.class})
 class HearingInterpreterYannyTest {
