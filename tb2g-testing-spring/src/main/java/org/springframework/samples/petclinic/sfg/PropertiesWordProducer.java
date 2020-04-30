@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
  * @author Jean-Francois Larouche (resolutech) on 2020-04-29
  */
 @Component
-@Profile("externalized")
+@Profile({"externalized", "laurel-profile"})
 @Primary
 public class PropertiesWordProducer implements WordProducer {
 
