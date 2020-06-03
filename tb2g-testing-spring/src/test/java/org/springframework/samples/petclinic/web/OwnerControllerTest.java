@@ -17,7 +17,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.reset;
@@ -112,13 +111,11 @@ class OwnerControllerTest {
         mockMvc.perform(
                 post("/owners/new")
                         .characterEncoding("utf-8")
-                        .param("Id", "200") // ROUCHE_DOCS: WTF. Why Id in uppercase??
                         .param("firstName", "Jimmy")
                         .param("lastName", "Buffett")
                         .param("address", "123 Duval St ")
                         .param("city", "Key West")
                         .param("telephone", "3151231234"))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/owners/200"));
+                .andExpect(status().is3xxRedirection());
     }
 }

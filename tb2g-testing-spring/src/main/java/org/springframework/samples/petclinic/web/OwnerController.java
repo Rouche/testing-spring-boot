@@ -53,6 +53,7 @@ public class OwnerController {
 
     @InitBinder
     public void setAllowedFields(WebDataBinder dataBinder) {
+        // ROUCHE_DOCS: They pass the ID in pathVariable like REST.
         dataBinder.setDisallowedFields("id");
     }
 
