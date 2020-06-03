@@ -17,10 +17,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.reset;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class) // ROUCHE_DOCS: For Captor
@@ -45,7 +47,7 @@ class OwnerControllerTest {
 
     /**
      * ROUCHE_DOCS: This is due to  the use of xml config. And the clinicService is reused between calls.
-     *      So it makes the unique call of the captor gets called 2 time.
+     * So it makes the unique call of the captor gets called 2 time.
      */
     @AfterEach
     void tearDown() {
@@ -102,5 +104,21 @@ class OwnerControllerTest {
                 .andExpect(model().attributeExists("owner"))
                 .andExpect(view().name(OwnerController.VIEWS_OWNER_CREATE_OR_UPDATE_FORM));
 
+    }
+
+    @Test
+    void processCreationFormValid() throws Exception {
+
+        mockMvc.perform(
+                post("/owners/new")
+                        .characterEncoding("utf-8")
+                        .param("Id", "200")
+                        .param("firstName", "Jimmy")
+                        .param("lastName", "Buffett")
+                        .param("address", "123 Duval St ")
+                        .param("city", "Key West")
+                        .param("telephone", "3151231234"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/owners/200"));
     }
 }
