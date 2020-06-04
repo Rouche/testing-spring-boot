@@ -36,6 +36,7 @@ class OwnerControllerTest {
 
     @Captor
     private ArgumentCaptor<String> stringCaptor;
+    @Captor ArgumentCaptor<Owner> ownerCaptor;
 
     private MockMvc mockMvc;
 
@@ -133,5 +134,42 @@ class OwnerControllerTest {
                 .andExpect(model().attributeHasErrors("owner"))
                 .andExpect(model().attributeHasFieldErrors("owner", "address"))
                 .andExpect(model().attributeHasFieldErrors("owner", "telephone"));
+    }
+
+    @Test
+    void processUpdateOwnerFormValid() throws Exception {
+
+        mockMvc.perform(
+                post("/owners/{ownerId}/edit", 300)
+                        .characterEncoding("utf-8")
+                        .param("firstName", "Jimmy")
+                        .param("lastName", "Buffett")
+                        .param("address", "123 Duval St ")
+                        .param("city", "Key West")
+                        .param("telephone", "3151231234"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/owners/300"));
+
+        then(clinicService).should().saveOwner(ownerCaptor.capture());
+
+        Owner owner = ownerCaptor.getValue();
+        assertThat(owner.getId()).isEqualTo(300);
+
+    }
+
+
+    @Test
+    void processUpdateOwnerFormNotValid() throws Exception {
+
+        mockMvc.perform(
+                post("/owners/{ownerId}/edit", 300)
+                        .characterEncoding("utf-8")
+                        .param("city", "Key West")
+                        .param("telephone", "3151231234"))
+                .andExpect(status().isOk())
+                .andExpect(view().name(OwnerController.VIEWS_OWNER_CREATE_OR_UPDATE_FORM))
+                .andExpect(model().attributeHasErrors("owner"))
+                .andExpect(model().attributeHasFieldErrors("owner", "firstName"))
+                .andExpect(model().attributeHasFieldErrors("owner", "lastName"));
     }
 }
