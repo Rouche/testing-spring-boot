@@ -34,7 +34,7 @@ jobs:
 
             - save_cache:
                   paths:
-                      - ~/.m2
+                      - ~/tmp/.m2
                   key: v1-dependencies-{{ checksum "tsbb2b-sfg-brewery/pom.xml" }}
 
             # run tests!
