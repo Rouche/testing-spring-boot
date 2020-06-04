@@ -1,6 +1,9 @@
+
+[![CircleCI](https://circleci.com/gh/Rouche/testing-spring-boot.svg?style=svg)](https://circleci.com/gh/Rouche/testing-spring-boot)
+
 # Testing Spring Boot B2G - SFG Brewery
 
-All source code examples in the repository are for my [Online Course - Testing Spring Beginner to Guru](https://www.udemy.com/testing-spring-boot-beginner-to-guru/?couponCode=GITHUB_REPO)
+All source code examples in the repository are for [Online Course - Testing Spring Beginner to Guru](https://www.udemy.com/testing-spring-boot-beginner-to-guru/?couponCode=GITHUB_REPO)
 
 This source code repository contains JUnit 5 and Spring Framework Testing examples.
 
