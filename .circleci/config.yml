@@ -35,7 +35,7 @@ jobs:
             - save_cache:
                   paths:
                       - ~/tmp/.m2
-                  key: v1-dependencies-{{ checksum "tsbb2b-sfg-brewery/pom.xml" }}
+                  key: v2-dependencies-{{ checksum "tsbb2b-sfg-brewery/pom.xml" }}
 
             # run tests!
             - run: cd tsbb2b-sfg-brewery && mvn integration-test
