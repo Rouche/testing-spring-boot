@@ -18,3 +18,11 @@ For questions and help:
 * Or post in the Slack Community exclusive to the course.
 
 GitHub Issues will not be addressed.
+
+## Wiremock
+
+##### Stand alone:
+http://wiremock.org/docs/running-standalone/
+
+##### Recording:
+http://wiremock.org/docs/record-playback/
