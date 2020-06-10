@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>guru.springframework.brewery</groupId>
-    <artifactId>tsbb-sfg-brewery</artifactId>
+    <artifactId>tsbb2b-sfg-brewery</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>tsbb2b-sfg-brewery</name>
     <description>Demo project for Spring Boot</description>
